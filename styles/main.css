@@ -8,7 +8,7 @@
   --color-neutral-300: #d0d4df;
   --color-neutral-500: #7b8398;
   --color-neutral-800: #1f2430;
-  --gradient-overlay: linear-gradient(110deg, rgba(16, 37, 66, 0.78), rgba(200, 36, 44, 0.45));
+  --gradient-overlay: linear-gradient(150deg, rgba(16, 37, 66, 0.88) 0%, rgba(16, 37, 66, 0.72) 55%, rgba(200, 36, 44, 0.55) 100%);
   --font-base: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   --font-heading: "Poppins", "Segoe UI", sans-serif;
   --max-width: 1180px;
@@ -273,6 +273,12 @@ img {
   display: grid;
   gap: 1.25rem;
   justify-items: center;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  background: rgba(16, 37, 66, 0.55);
+  border-radius: 1.75rem;
+  box-shadow: 0 30px 45px rgba(16, 37, 66, 0.35);
+  backdrop-filter: blur(6px);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hero-eyebrow {
@@ -681,12 +687,47 @@ img {
 }
 
 .callout {
-  background: linear-gradient(120deg, rgba(16, 37, 66, 0.94), rgba(200, 36, 44, 0.92));
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, rgba(16, 37, 66, 0.94), rgba(200, 36, 44, 0.88));
   color: #ffffff;
   border-radius: 1.75rem;
   padding: clamp(2rem, 5vw, 3rem);
   text-align: center;
   box-shadow: 0 25px 40px rgba(16, 37, 66, 0.25);
+  isolation: isolate;
+}
+
+.callout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--callout-image, none);
+  background-size: cover;
+  background-position: var(--callout-position, center);
+  opacity: var(--callout-image-opacity, 0.45);
+  filter: contrast(0.9) brightness(0.85);
+  transform: scale(1.02);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  z-index: -2;
+}
+
+.callout::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(16, 37, 66, 0.9), rgba(200, 36, 44, 0.55));
+  z-index: -1;
+}
+
+.callout:hover::before {
+  transform: scale(1.07);
+  opacity: var(--callout-image-opacity-hover, 0.55);
+}
+
+.callout > * {
+  position: relative;
+  z-index: 1;
 }
 
 .callout h2 {
@@ -816,27 +857,27 @@ img {
 }
 
 body.body-accueil .page-hero {
-  background-image: url("/assets/photos/kids-giant-chess-park.jpg");
+  background-image: url("/assets/photos/chess-8578826_1920.png");
 }
 
 body.body-club .page-hero {
-  background-image: url("/assets/photos/boy-giant-chess.jpg");
+  background-image: url("/assets/photos/chess-8327652_1920.png");
 }
 
 body.body-tarifs .page-hero {
-  background-image: url("/assets/photos/wooden-queen.jpg");
+  background-image: url("/assets/photos/ai-generated-8707688_1920.png");
 }
 
 body.body-adhesion .page-hero {
-  background-image: url("/assets/photos/stone-chess-landscape.jpg");
+  background-image: url("/assets/photos/boy-2756201_1920.jpg");
 }
 
 body.body-liens .page-hero {
-  background-image: url("/assets/photos/neon-chess.jpg");
+  background-image: url("/assets/photos/ai-generated-9789195_1920.jpg");
 }
 
 body.body-contact .page-hero {
-  background-image: url("/assets/photos/knight-park.jpg");
+  background-image: url("/assets/photos/chess-5971021_1920.jpg");
 }
 
 @media (min-width: 1440px) {
