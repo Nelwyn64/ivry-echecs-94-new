@@ -857,7 +857,7 @@ img {
 }
 
 body.body-accueil .page-hero {
-  background-image: url("/assets/photos/chess-8578826_1920.png");
+  background-image: url("/assets/photos/bg-ivry.jpg");
 }
 
 body.body-club .page-hero {
@@ -951,3 +951,4 @@ ul {
     background-color: rgba(16, 37, 66, 0.95);
   }
 }
+
