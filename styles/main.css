@@ -430,7 +430,7 @@ img {
   background: linear-gradient(145deg, rgba(223, 230, 245, 0.98) 0%, rgba(196, 206, 226, 0.95) 100%);
   border-radius: 1.25rem;
   padding: 2rem;
-  border: 1px solid rgba(16, 37, 66, 0.22);
+  border: 1px solid rgba(16, 37, 66, 0.12);
   box-shadow: 0 18px 32px rgba(16, 37, 66, 0.14);
 }
 
@@ -607,11 +607,11 @@ img {
 }
 
 .contact-card {
-  background: linear-gradient(150deg, rgba(226, 233, 247, 0.98) 0%, rgba(204, 214, 233, 0.95) 100%);
+  background: #ffffff;
   border-radius: 1.5rem;
   padding: 2rem;
-  box-shadow: 0 18px 34px rgba(16, 37, 66, 0.16);
-  border: 1px solid rgba(16, 37, 66, 0.22);
+  box-shadow: 0 16px 30px rgba(16, 37, 66, 0.12);
+  border: 1px solid rgba(16, 37, 66, 0.08);
 }
 
 .contact-card__item {
@@ -624,13 +624,13 @@ img {
   letter-spacing: 0.18em;
   font-size: 0.75rem;
   font-weight: 700;
-  color: rgba(16, 37, 66, 0.7);
+  color: var(--color-neutral-500);
 }
 
 .contact-card__value {
   font-size: 1.1rem;
   font-weight: 600;
-  color: rgba(16, 37, 66, 0.9);
+  color: var(--color-neutral-800);
 }
 
 .contact-layout {
@@ -958,6 +958,8 @@ ul {
     background-color: rgba(16, 37, 66, 0.95);
   }
 }
+
+
 
 
 
