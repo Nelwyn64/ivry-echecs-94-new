@@ -43,9 +43,9 @@
             <a class="hero-title__link" href="/assets/documents/Forfait_loisirs_jeunes_2025-Formulaire_demande.pdf" target="_blank" rel="noopener">Pr&eacute;-inscription</a>
           </h1>
           <div class="hero-cta-grid">
-            <a class="hero-cta-card hero-cta-card--primary" href="#preinscription-en-ligne">
+            <a class="hero-cta-card hero-cta-card--primary" href="/assets/documents/Forfait_loisirs_jeunes_2025-Formulaire_demande.pdf" target="_blank" rel="noopener">
               <span class="hero-cta-label">Pr&eacute;-inscription</span>
-              <span class="hero-cta-subtext">Remplir le formulaire en ligne et l''envoyer directement</span>
+              <span class="hero-cta-subtext">T&eacute;l&eacute;charger le formulaire puis l''envoyer &agrave; <strong>ivryechecs@gmail.com</strong></span>
             </a>
             <a class="hero-cta-card hero-cta-card--pending" href="#adhesion-en-attente" aria-disabled="true">
               <span class="hero-cta-label">Adh&eacute;sion</span>
@@ -55,83 +55,6 @@
         </div>
       </section>
 
-      <section class="page-section" id="preinscription-en-ligne">
-        <div class="container">
-          <header class="section-header">
-            <p class="section-eyebrow">Pr&eacute;-inscription</p>
-            <h2 class="section-title">Formulaire en ligne</h2>
-            <p>Merci de remplir les champs ci-dessous pour pr&eacute;-inscrire un joueur.</p>
-          </header>
-          <form id="preinscription-form" class="preinscription-form">
-            <div class="form-field">
-              <label for="nom-inscrit">Nom de la personne &agrave; inscrire *</label>
-              <input type="text" id="nom-inscrit" name="nom_inscrit" required autocomplete="family-name">
-            </div>
-            <div class="form-field">
-              <label for="prenom-inscrit">Pr&eacute;nom de la personne &agrave; inscrire *</label>
-              <input type="text" id="prenom-inscrit" name="prenom_inscrit" required autocomplete="given-name">
-            </div>
-            <div class="form-field">
-              <label for="demarches">Nom et pr&eacute;nom de la personne r&eacute;alisant les d&eacute;marches (si la personne &agrave; inscrire est un mineur)</label>
-              <input type="text" id="demarches" name="demarches" autocomplete="name">
-            </div>
-            <div class="form-field">
-              <label for="email">Adresse email *</label>
-              <input type="email" id="email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-field">
-              <label for="telephone">T&eacute;l&eacute;phone *</label>
-              <input type="tel" id="telephone" name="telephone" required autocomplete="tel">
-            </div>
-            <div class="form-field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5"></textarea>
-            </div>
-            <div class="form-field">
-              <label for="captcha">Captcha (code anti-spam) *</label>
-              <input type="text" id="captcha" name="captcha" required>
-            </div>
-            <p class="form-required-note">Remarque : les champs suivis d'un ast&eacute;risque * sont obligatoires.</p>
-            <button type="submit" class="btn btn-primary">Envoyer le formulaire</button>
-            <div class="form-feedback" aria-live="polite" role="status"></div>
-          </form>
-        </div>
-                <script>
-          (function () {
-            var form = document.getElementById('preinscription-form');
-            if (!form) {
-              return;
-            }
-            var feedback = form.querySelector('.form-feedback');
-            form.addEventListener('submit', function (event) {
-              event.preventDefault();
-              if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-              }
-              var formData = new FormData(form);
-              var lines = [
-                'Nom de la personne a inscrire: ' + (formData.get('nom_inscrit') || ''),
-                'Prenom de la personne a inscrire: ' + (formData.get('prenom_inscrit') || ''),
-                'Personne realisant les demarches: ' + (formData.get('demarches') || ''),
-                'Adresse email: ' + (formData.get('email') || ''),
-                'Telephone: ' + (formData.get('telephone') || ''),
-                'Message: ' + (formData.get('message') || ''),
-                'Captcha: ' + (formData.get('captcha') || '')
-              ];
-              var subjectName = formData.get('nom_inscrit') || 'Pre-inscription';
-              var mailtoSubject = encodeURIComponent('Pre-inscription - ' + subjectName);
-              var newline = String.fromCharCode(10);
-              var mailtoBody = encodeURIComponent(lines.join(newline)).replace(/%0A/g, '%0D%0A');
-              var mailtoLink = 'mailto:ivryechecs@gmail.com?subject=' + mailtoSubject + '&body=' + mailtoBody;
-              window.location.href = mailtoLink;
-              if (feedback) {
-                feedback.textContent = "Votre client de messagerie devrait s'ouvrir pour finaliser l'envoi.";
-              }
-            });
-          }());
-        </script>
-      </section>
       <section class="page-section">
         <div class="container">
           <header class="section-header">
