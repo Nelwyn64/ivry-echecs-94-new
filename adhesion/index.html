@@ -134,50 +134,88 @@
               overflow: hidden;
               clip: rect(0 0 0 0);
             }
+            /* Alias pour compatibilité avec la classe suggérée */
+            .preinscription-form .visually-hidden {
+              position: absolute;
+              height: 1px;
+              width: 1px;
+              margin: -1px;
+              padding: 0;
+              border: 0;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+            }
           </style>
           <!-- Formulaire Netlify -->
-          <form name="adhesion-preinscription" method="POST" action="/merci/" data-netlify="true" netlify-honeypot="bot-field" class="preinscription-form">
-            <!-- Champs requis par Netlify pour identifier le formulaire -->
+          <form name="adhesion-preinscription"
+                method="POST"
+                action="/merci/"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                class="preinscription-form">
+            <!-- Netlify Forms -->
             <input type="hidden" name="form-name" value="adhesion-preinscription">
-            <!-- Netlify honeypot anti-spam -->
-            <p class="form-field u-hidden-visually">
-              <label for="bot-field">Ne pas remplir&nbsp;:
-                <input id="bot-field" name="bot-field" type="text" autocomplete="off">
-              </label>
-            </p>
+
+            <!-- Honeypot -->
+            <p class="form-field u-hidden-visually visually-hidden"><label>Ne pas remplir si vous êtes humain :
+              <input name="bot-field" type="text" autocomplete="off">
+            </label></p>
+
             <p class="form-required-note">Les champs suivis d'un ast&eacute;risque (<span aria-hidden="true">*</span>) sont obligatoires.</p>
+
+            <!-- Nom -->
             <div class="form-field">
-              <label for="nom-inscrit">Nom de la personne &agrave; inscrire <span aria-hidden="true">*</span></label>
-              <input type="text" id="nom-inscrit" name="nom_inscrit" required autocomplete="family-name" aria-required="true" aria-invalid="false">
+              <label for="inscrit-nom">Nom de la personne &agrave; inscrire *</label>
+              <input id="inscrit-nom" name="inscrit_nom" type="text" required autocomplete="family-name" aria-required="true" aria-invalid="false">
             </div>
+
+            <!-- Prénom -->
             <div class="form-field">
-              <label for="prenom-inscrit">Pr&eacute;nom de la personne &agrave; inscrire <span aria-hidden="true">*</span></label>
-              <input type="text" id="prenom-inscrit" name="prenom_inscrit" required autocomplete="given-name" aria-required="true" aria-invalid="false">
+              <label for="inscrit-prenom">Pr&eacute;nom de la personne &agrave; inscrire *</label>
+              <input id="inscrit-prenom" name="inscrit_prenom" type="text" required autocomplete="given-name" aria-required="true" aria-invalid="false">
             </div>
+
+            <!-- Responsable -->
             <div class="form-field">
-              <label for="demarches">Nom et pr&eacute;nom de la personne r&eacute;alisant les d&eacute;marches (si mineur)</label>
-              <input type="text" id="demarches" name="demarches" autocomplete="name" aria-required="false" aria-invalid="false">
+              <label for="responsable">Nom et pr&eacute;nom du responsable (si mineur)</label>
+              <input id="responsable" name="responsable" type="text" autocomplete="name" aria-required="false" aria-invalid="false">
             </div>
+
+            <!-- Email -->
             <div class="form-field">
-              <label for="email">Adresse email <span aria-hidden="true">*</span></label>
-              <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="email-help">
-              <p id="email-help" class="form-hint">Nous utiliserons cette adresse pour confirmer la demande.</p>
+              <label for="email">Adresse email *</label>
+              <input id="email" name="email" type="email" required autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="help-email">
+              <small id="help-email" class="form-hint">Nous utiliserons cette adresse pour confirmer la demande.</small>
             </div>
+
+            <!-- Téléphone -->
             <div class="form-field">
-              <label for="telephone">T&eacute;l&eacute;phone <span aria-hidden="true">*</span></label>
-              <input type="tel" id="telephone" name="telephone" required autocomplete="tel" inputmode="tel" pattern="^[0-9+().\\s-]{6,}$" aria-required="true" aria-invalid="false" aria-describedby="telephone-help">
-              <p id="telephone-help" class="form-hint">Format libre&nbsp;: chiffres, espaces, +, (), - autoris&eacute;s.</p>
+              <label for="telephone">T&eacute;l&eacute;phone *</label>
+              <input id="telephone" name="telephone" type="tel" inputmode="tel" pattern="^[0-9+().\s-]{6,}$" required autocomplete="tel" aria-required="true" aria-invalid="false" aria-describedby="help-tel">
+              <small id="help-tel" class="form-hint">Exemples valides : 06 12 34 56 78, +33 6 12 34 56 78.</small>
             </div>
+
+            <!-- Message -->
             <div class="form-field">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" aria-required="false" aria-invalid="false"></textarea>
+              <textarea id="message" name="message" rows="5" placeholder="Votre message (optionnel)"></textarea>
             </div>
+
+            <!-- RGPD -->
             <div class="form-field form-consent">
-              <input type="checkbox" id="consentement" name="consentement" value="oui" required aria-required="true" aria-invalid="false">
-              <label for="consentement">J'accepte que ces donn&eacute;es soient utilis&eacute;es pour me recontacter, conform&eacute;ment &agrave; la <a href="/mentions-legales/#confidentialite">Politique de confidentialit&eacute;</a>. <span aria-hidden="true">*</span></label>
+              <input type="checkbox" id="consent" name="consent" required aria-required="true" aria-invalid="false">
+              <label for="consent">J’accepte que ces donn&eacute;es soient utilis&eacute;es pour me recontacter, conform&eacute;ment &agrave; la <a href="/mentions-legales/#confidentialite">Politique de confidentialit&eacute;</a>. <span aria-hidden="true">*</span></label>
             </div>
-            <!-- Redirection post-soumission vers /merci/ : modifier l'attribut action si besoin -->
+
             <button type="submit" class="btn btn-primary">Envoyer la pr&eacute;-inscription</button>
+
+            <!-- TODO: Si vous utilisez JS de validation custom, gardez-le non bloquant.
+                 Netlify doit toujours pouvoir poster ce formulaire en POST. -->
+
+            <!-- TODO: Activer la notification email dans Netlify
+                 1) Dashboard Netlify > Forms > adhesion-preinscription
+                 2) Onglet Notifications > Add notification > Email
+                 3) Saisir ivryechecs@gmail.com -->
           </form>
           <noscript>
             <p class="form-hint">Ce formulaire fonctionne sans JavaScript&nbsp;: remplissez les champs puis validez pour envoyer votre pr&eacute;-inscription.</p>
