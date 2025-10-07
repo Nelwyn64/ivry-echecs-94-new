@@ -442,6 +442,12 @@ img {
   margin: 0.5rem 0 0;
 }
 
+/* Increase contrast for section titles on Club and Adhésion pages */
+.body-club .section-header .section-title,
+.body-adhesion .section-header .section-title {
+  color: var(--color-secondary);
+}
+
 .section-lead {
   margin: 0.75rem auto 0;
   max-width: 760px;
