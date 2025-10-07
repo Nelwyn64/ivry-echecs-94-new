@@ -786,6 +786,17 @@ img {
   }
 }
 
+/* Fixe l’affichage des puces dans l’encadré "Matériels pédagogique/enseignement"
+   de la page Adhésion: utilise des points classiques comme l’encadré voisin. */
+.body-adhesion .download-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.body-adhesion .download-list span::before {
+  content: none;
+}
+
 .contact-form {
   display: grid;
   gap: 1rem;
