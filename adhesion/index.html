@@ -43,15 +43,145 @@
             <a class="hero-title__link" href="/assets/documents/Forfait_loisirs_jeunes_2025-Formulaire_demande.pdf" target="_blank" rel="noopener">Pr&eacute;-inscription</a>
           </h1>
           <div class="hero-cta-grid">
-            <a class="hero-cta-card hero-cta-card--primary" href="/assets/documents/Forfait_loisirs_jeunes_2025-Formulaire_demande.pdf" target="_blank" rel="noopener">
+            <a class="hero-cta-card hero-cta-card--primary" href="#preinscription-en-ligne">
               <span class="hero-cta-label">Pr&eacute;-inscription</span>
-              <span class="hero-cta-subtext">T&eacute;l&eacute;charger le formulaire puis l''envoyer &agrave; <strong>ivryechecs@gmail.com</strong></span>
+              <span class="hero-cta-subtext">Remplir le formulaire en ligne et envoyer directement</span>
             </a>
             <a class="hero-cta-card hero-cta-card--pending" href="#adhesion-en-attente" aria-disabled="true">
               <span class="hero-cta-label">Adh&eacute;sion</span>
               <span class="hero-cta-subtext">Lien AssoConnect disponible prochainement</span>
             </a>
           </div>
+        </div>
+      </section>
+
+
+      <section class="page-section" id="preinscription-en-ligne">
+        <div class="container">
+          <header class="section-header">
+            <p class="section-eyebrow">Pr&eacute;-inscription</p>
+            <h2 class="section-title">Formulaire en ligne</h2>
+            <p>Merci de remplir les champs ci-dessous pour pr&eacute;-inscrire un joueur.</p>
+          </header>
+          <!-- Styles locaux pour conserver la coh&eacute;rence visuelle du site -->
+          <style>
+            .preinscription-form {
+              max-width: 640px;
+              margin: 2rem auto 0;
+              display: grid;
+              gap: 1.5rem;
+            }
+            .preinscription-form .form-field {
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            }
+            .preinscription-form label {
+              font-weight: 600;
+            }
+            .preinscription-form input,
+            .preinscription-form textarea {
+              width: 100%;
+              border: 1px solid #d4d7dc;
+              border-radius: 8px;
+              padding: 0.75rem 1rem;
+              background-color: #fff;
+              font: inherit;
+              transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            }
+            .preinscription-form textarea {
+              min-height: 160px;
+              resize: vertical;
+            }
+            .preinscription-form :is(input, textarea):focus {
+              border-color: #ff6b00;
+              box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+              outline: none;
+            }
+            .preinscription-form :is(input, textarea):user-invalid,
+            .preinscription-form :is(input, textarea):invalid:focus {
+              border-color: #c62828;
+              box-shadow: 0 0 0 1px rgba(198, 40, 40, 0.25);
+            }
+            .preinscription-form .form-hint,
+            .preinscription-form .form-required-note {
+              font-size: 0.875rem;
+              color: #5a6470;
+              margin: 0;
+            }
+            .preinscription-form .form-required-note {
+              text-align: center;
+            }
+            .preinscription-form .form-consent {
+              display: flex;
+              align-items: flex-start;
+              gap: 0.75rem;
+            }
+            .preinscription-form .form-consent input {
+              width: auto;
+              margin-top: 0.4rem;
+            }
+            .preinscription-form button {
+              align-self: flex-start;
+            }
+            .preinscription-form .u-hidden-visually {
+              position: absolute;
+              height: 1px;
+              width: 1px;
+              margin: -1px;
+              padding: 0;
+              border: 0;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+            }
+          </style>
+          <!-- Formulaire Netlify -->
+          <form name="adhesion-preinscription" method="POST" action="/merci/" data-netlify="true" netlify-honeypot="bot-field" class="preinscription-form">
+            <!-- Champs requis par Netlify pour identifier le formulaire -->
+            <input type="hidden" name="form-name" value="adhesion-preinscription">
+            <!-- Netlify honeypot anti-spam -->
+            <p class="form-field u-hidden-visually">
+              <label for="bot-field">Ne pas remplir&nbsp;:
+                <input id="bot-field" name="bot-field" type="text" autocomplete="off">
+              </label>
+            </p>
+            <p class="form-required-note">Les champs suivis d'un ast&eacute;risque (<span aria-hidden="true">*</span>) sont obligatoires.</p>
+            <div class="form-field">
+              <label for="nom-inscrit">Nom de la personne &agrave; inscrire <span aria-hidden="true">*</span></label>
+              <input type="text" id="nom-inscrit" name="nom_inscrit" required autocomplete="family-name" aria-required="true" aria-invalid="false">
+            </div>
+            <div class="form-field">
+              <label for="prenom-inscrit">Pr&eacute;nom de la personne &agrave; inscrire <span aria-hidden="true">*</span></label>
+              <input type="text" id="prenom-inscrit" name="prenom_inscrit" required autocomplete="given-name" aria-required="true" aria-invalid="false">
+            </div>
+            <div class="form-field">
+              <label for="demarches">Nom et pr&eacute;nom de la personne r&eacute;alisant les d&eacute;marches (si mineur)</label>
+              <input type="text" id="demarches" name="demarches" autocomplete="name" aria-required="false" aria-invalid="false">
+            </div>
+            <div class="form-field">
+              <label for="email">Adresse email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="email-help">
+              <p id="email-help" class="form-hint">Nous utiliserons cette adresse pour confirmer la demande.</p>
+            </div>
+            <div class="form-field">
+              <label for="telephone">T&eacute;l&eacute;phone <span aria-hidden="true">*</span></label>
+              <input type="tel" id="telephone" name="telephone" required autocomplete="tel" inputmode="tel" pattern="^[0-9+().\\s-]{6,}$" aria-required="true" aria-invalid="false" aria-describedby="telephone-help">
+              <p id="telephone-help" class="form-hint">Format libre&nbsp;: chiffres, espaces, +, (), - autoris&eacute;s.</p>
+            </div>
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" aria-required="false" aria-invalid="false"></textarea>
+            </div>
+            <div class="form-field form-consent">
+              <input type="checkbox" id="consentement" name="consentement" value="oui" required aria-required="true" aria-invalid="false">
+              <label for="consentement">J'accepte que ces donn&eacute;es soient utilis&eacute;es pour me recontacter, conform&eacute;ment &agrave; la <a href="/mentions-legales/#confidentialite">Politique de confidentialit&eacute;</a>. <span aria-hidden="true">*</span></label>
+            </div>
+            <!-- Redirection post-soumission vers /merci/ : modifier l'attribut action si besoin -->
+            <button type="submit" class="btn btn-primary">Envoyer la pr&eacute;-inscription</button>
+          </form>
+          <noscript>
+            <p class="form-hint">Ce formulaire fonctionne sans JavaScript&nbsp;: remplissez les champs puis validez pour envoyer votre pr&eacute;-inscription.</p>
+          </noscript>
         </div>
       </section>
 
