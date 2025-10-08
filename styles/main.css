@@ -1035,6 +1035,12 @@ body.body-liens .page-hero {
   background-image: url("/assets/photos/ai-generated-9789195_1920.jpg");
 }
 
+/* Liens utiles: supprimer l'icône précédant chaque lien
+   tout en conservant la validité des liens */
+.body-liens .links-group a::before {
+  content: none;
+}
+
 body.body-contact .page-hero {
   background-image: url("/assets/photos/chess-5971021_1920.jpg");
 }
