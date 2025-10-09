@@ -120,7 +120,7 @@
     element.classList.toggle("form-status--error", Boolean(isError));
     element.classList.toggle("form-status--success", !isError);
   }
-})()
+})();
 
 // ------------------------------------------------------------
 // Hero Quotes — injection automatique après le header (overlay)
