@@ -177,9 +177,17 @@
   function mount() {
     const hero = findHeroContainer();
     const slot = insertSlot(hero);
-    if (!slot) return;
+    if (!slot) { console.warn('[HeroQuotes] pas de slot'); return; }
     if (window.mountHeroQuotes) {
-      window.mountHeroQuotes(slot);
+      try {
+        console.log('[HeroQuotes] mounting with', (window.QUOTES||[]).length, 'quotes');
+        window.mountHeroQuotes(slot);
+        console.log('[HeroQuotes] mounted');
+      } catch (e) {
+        console.warn('[HeroQuotes] mount error', e);
+      }
+    } else {
+      console.warn('[HeroQuotes] API mountHeroQuotes manquante');
     }
   }
 
@@ -193,6 +201,8 @@
       if (hasHeader) { obs.disconnect(); init(); }
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
+    // init immédiat + relance de sécurité après 1s au cas où
     init();
+    setTimeout(init, 1000);
   });
 })();

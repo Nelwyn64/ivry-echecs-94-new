@@ -1127,7 +1127,7 @@ ul {
 :root{ --hq-top:18vh; --hq-maxw:1100px; --hq-fade:.5s; --hq-reserve:22vh; }
 .hero{ position:relative; }
 .page-hero, .masthead, .banner { position: relative; }
-.page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { padding-top: var(--hq-reserve); }
+.page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { margin-top: var(--hq-reserve); }
 .hero-quotes{
   position:absolute; top:var(--hq-top); left:50%; transform:translateX(-50%);
   width:min(100%,var(--hq-maxw)); padding:0 1rem; text-align:center;
