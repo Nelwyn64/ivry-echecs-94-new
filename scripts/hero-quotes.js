@@ -24,7 +24,8 @@
       const fig = document.createElement('figure');
       fig.className = 'hq-slide' + (i === 0 ? ' is-active' : '');
       const block = document.createElement('blockquote');
-      block.textContent = `« ${q.text} »`;
+      // Texte sans guillemets, rendu sobre
+      block.textContent = `${q.text}`;
       block.setAttribute('aria-live', 'polite');
       const cap = document.createElement('figcaption');
       cap.textContent = `— ${authorLabel(q)}`;
@@ -83,4 +84,3 @@
     container.appendChild(el);
   };
 })();
-
