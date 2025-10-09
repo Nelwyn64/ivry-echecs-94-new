@@ -1124,24 +1124,24 @@ ul {
 
  
 /* === Hero Quotes (overlay sur image, sans bande) === */
-:root{ --hq-top:.5rem; --hq-maxw:1000px; --hq-fade:.5s; --hq-reserve:20vh; }
+:root{ --hq-top:.25rem; --hq-maxw:1100px; --hq-fade:.5s; --hq-reserve:20vh; }
 .hero{ position:relative; }
 .page-hero, .masthead, .banner { position: relative; }
 .page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { margin-top: var(--hq-reserve); }
 .hero-quotes{
-  position:absolute; top:var(--hq-top); left:0.75rem; right:auto; transform:none;
-  width:calc(100% - 1.5rem); max-width:var(--hq-maxw); padding:0 .25rem; text-align:left;
+  position:absolute; top:var(--hq-top); left:1rem; right:auto; transform:none;
+  width:calc(100% - 2rem); max-width:var(--hq-maxw); padding:0 .25rem; text-align:left;
   color:inherit; background:transparent; z-index:50; pointer-events:auto;
 }
 .hq-slide{ position:absolute; left:0; right:0; top:0; margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease; }
 .hq-slide.is-active{ opacity:1; visibility:visible; }
 .hero-quotes blockquote{
   margin:0; font-style:italic; font-weight:600;
-  font-size:clamp(1rem,1.6vw,1.25rem); line-height:1.35; text-wrap:balance;
+  font-size:clamp(1.05rem,1.6vw,1.25rem); line-height:1.35;
   text-shadow:0 2px 8px rgba(0,0,0,.35);
   padding:0; border:0; background:transparent; border-radius:0;
-  /* Afficher la citation en entier (multi-ligne si nécessaire) */
-  white-space:normal; overflow:visible; text-overflow:clip; word-break:normal;
+  /* Forcer l’affichage en ligne (une phrase) */
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .hero-quotes figcaption{
   display:block; margin-top:.15rem; font-size:clamp(.9rem,1.2vw,1rem); opacity:.95;
