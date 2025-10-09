@@ -1124,7 +1124,7 @@ ul {
 
  
 /* === Hero Quotes (overlay sur image, sans bande) === */
-:root{ --hq-top:18vh; --hq-maxw:820px; --hq-fade:.5s; --hq-reserve:22vh; }
+:root{ --hq-top: calc(var(--hq-reserve) / 2); --hq-maxw:820px; --hq-fade:.5s; --hq-reserve:22vh; }
 .hero{ position:relative; }
 .page-hero, .masthead, .banner { position: relative; }
 .page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { margin-top: var(--hq-reserve); }
@@ -1135,11 +1135,6 @@ ul {
 }
 .hq-slide{ position:absolute; left:0; right:0; top:0; margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease; }
 .hq-slide.is-active{ opacity:1; visibility:visible; }
-.hero-quotes blockquote{
-  margin:0 0 .35rem; font-style:italic; font-weight:600;
-  font-size:clamp(1.05rem,2.2vw,1.5rem); line-height:1.35; text-wrap:balance;
-  text-shadow:0 2px 8px rgba(0,0,0,.35);
-  padding:0; border:0; background:transparent; border-radius:0;
-}
-.hero-quotes figcaption{ font-size:clamp(.9rem,1.6vw,1rem); opacity:.95; }
+ param($m) $block=$m.Groups[1].Value; if($block -notmatch "white-space") { return ".hero-quotes blockquote{`n  margin:0 0 .35rem; font-style:italic; font-weight:600;`n  font-size:clamp(1rem,1.8vw,1.3rem); line-height:1.3; text-wrap:balance;`n  text-shadow:0 2px 8px rgba(0,0,0,.35);`n  padding:0; border:0; background:transparent; border-radius:0;`n  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;`n}" } else { return $m.Value } 
+ param($m) ".hero-quotes figcaption{ font-size:clamp(.85rem,1.4vw,.95rem); opacity:.95; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }" 
 @media (prefers-reduced-motion:reduce){ .hq-slide{ transition:none } }
