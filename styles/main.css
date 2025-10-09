@@ -442,7 +442,7 @@ img {
   margin: 0.5rem 0 0;
 }
 
-/* Increase contrast for section titles on Club and Adhésion pages */
+/* Increase contrast for section titles on Club and AdhÃ©sion pages */
 .body-club .section-header .section-title,
 .body-adhesion .section-header .section-title {
   color: var(--color-secondary);
@@ -712,7 +712,7 @@ img {
 }
 
 .download-list span::before {
-  content: "ðŸ“„";
+  content: "Ã°Å¸â€œâ€ž";
   font-size: 1.1rem;
 }
 
@@ -742,7 +742,7 @@ img {
 }
 
 .links-group a::before {
-  content: "â†’";
+  content: "Ã¢â€ â€™";
   font-size: 0.9rem;
   color: var(--color-primary);
 }
@@ -786,8 +786,8 @@ img {
   }
 }
 
-/* Fixe l’affichage des puces dans l’encadré "Matériels pédagogique/enseignement"
-   de la page Adhésion: utilise des points classiques comme l’encadré voisin. */
+/* Fixe lâ€™affichage des puces dans lâ€™encadrÃ© "MatÃ©riels pÃ©dagogique/enseignement"
+   de la page AdhÃ©sion: utilise des points classiques comme lâ€™encadrÃ© voisin. */
 .body-adhesion .download-list {
   list-style: disc;
   padding-left: 1.25rem;
@@ -1035,8 +1035,8 @@ body.body-liens .page-hero {
   background-image: url("/assets/photos/ai-generated-9789195_1920.jpg");
 }
 
-/* Liens utiles: supprimer l'icône précédant chaque lien
-   tout en conservant la validité des liens */
+/* Liens utiles: supprimer l'icÃ´ne prÃ©cÃ©dant chaque lien
+   tout en conservant la validitÃ© des liens */
 .body-liens .links-group a::before {
   content: none;
 }
@@ -1123,10 +1123,4 @@ ul {
 
 
  
-/* Quotes carousel (fond transparent, sur l'image de fond) */
-.quotes-carousel{margin:2.5rem auto 1rem;max-width:960px;text-align:center;color:inherit;background:transparent}
-.quotes-carousel .quote{opacity:0;visibility:hidden;transition:opacity 0.5s ease, visibility 0.5s ease;margin:0}
-.quotes-carousel .quote.is-active{opacity:1;visibility:visible}
-.quotes-carousel blockquote{margin:0 0 .5rem;font-style:italic;font-size:clamp(1.2rem,2.6vw,1.8rem);line-height:1.4;text-wrap:balance;text-shadow:0 2px 6px rgba(0,0,0,.35)}
-.quotes-carousel figcaption{font-size:.95rem;opacity:.9}
-@media (prefers-reduced-motion:reduce){.quotes-carousel .quote{transition:none}}
+
