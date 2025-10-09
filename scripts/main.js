@@ -195,16 +195,15 @@
     if (!anchorHero) return null;
     anchorHero.classList.add('hero');
     // Insertion préférentielle dans .hero-content pour hériter de sa couleur (souvent blanche)
-    const inner = anchorHero.querySelector('.hero-content') || anchorHero;
     let slot = document.getElementById('hero-quotes-slot');
-    if (slot && slot.parentNode === inner) return slot;
+    if (slot && slot.parentNode === anchorHero) return slot;
     if (slot && slot.parentNode) slot.parentNode.removeChild(slot);
     const startC = document.createComment(' HERO-QUOTES-START ');
     slot = document.createElement('div'); slot.id = 'hero-quotes-slot';
     const endC = document.createComment(' HERO-QUOTES-END ');
-    inner.insertBefore(endC, inner.firstChild);
-    inner.insertBefore(slot, endC);
-    inner.insertBefore(startC, slot);
+    anchorHero.insertBefore(endC, anchorHero.firstChild);
+    anchorHero.insertBefore(slot, endC);
+    anchorHero.insertBefore(startC, slot);
     return slot;
   }
 
