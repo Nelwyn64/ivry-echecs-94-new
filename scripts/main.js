@@ -141,7 +141,41 @@
 
   function ensureDeps() {
     if (window.QUOTES && window.mountHeroQuotes) return Promise.resolve();
-    return loadScript('/scripts/quotes-data.js').then(() => loadScript('/scripts/hero-quotes.js'));
+    // Tentative de chargement des scripts dédiés
+    return loadScript('/scripts/quotes-data.js')
+      .catch((e) => { console.warn('[HeroQuotes] quotes-data failed, using inline fallback', e); })
+      .then(() => loadScript('/scripts/hero-quotes.js'))
+      .catch((e) => { console.warn('[HeroQuotes] hero-quotes failed, will define inline', e); })
+      .then(() => {
+        // Fallbacks inline si nécessaire
+        if (!window.QUOTES) {
+          window.QUOTES = [
+            { text: "Pour progresser, il faut étudier les finales avant toute chose.", author: "José Raúl Capablanca", born: 1888, died: 1942 },
+            { text: "Quand vous voyez un bon coup, cherchez-en un meilleur.", author: "Emanuel Lasker", born: 1868, died: 1941 },
+            { text: "Aidez vos pièces, elles vous aideront.", author: "Paul Morphy", born: 1837, died: 1884 },
+            { text: "Il y a plus d'aventures sur un échiquier que sur toutes les mers du monde.", author: "Pierre Mac Orlan", born: 1882, died: 1970 },
+            { text: "La tactique, c'est ce que vous faites quand il y a quelque chose à faire ; la stratégie, c'est ce que vous faites quand il n'y a rien à faire.", author: "Savielly Tartakower", born: 1887, died: 1956 },
+          ];
+        }
+        if (!window.mountHeroQuotes) {
+          (function(){
+            const DISPLAY_MS = 10000, TRANSITION_MS = 500;
+            function authorLabel(q){const b=typeof q.born==='number'?q.born:'';const d=typeof q.died==='number'?q.died:'';return b&&d?`${q.author} (${b}–${d})`:(q.author||'');}
+            window.mountHeroQuotes = function(container){
+              if(!container) return; const quotes=(window.QUOTES||[]).slice(0); if(!quotes.length) return;
+              const section=document.createElement('section'); section.className='hero-quotes'; section.setAttribute('aria-label',"Citations d'échecs"); section.tabIndex=0;
+              const slides=quotes.map((q,i)=>{const f=document.createElement('figure'); f.className='hq-slide'+(i===0?' is-active':''); const b=document.createElement('blockquote'); b.textContent=`« ${q.text} »`; b.setAttribute('aria-live','polite'); const c=document.createElement('figcaption'); c.textContent=`— ${authorLabel(q)}`; f.appendChild(b); f.appendChild(c); return f;});
+              slides.forEach(s=>section.appendChild(s));
+              let index=0, timer=null; const prefersReduced=(()=>{try{const m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)');return !!(m&&m.matches);}catch(_){return false;}})();
+              function show(n){if(n===index) return; const cur=slides[index]; const nxt=slides[(n+slides.length)%slides.length]; cur.classList.remove('is-active'); if(!prefersReduced){cur.classList.add('is-leaving'); setTimeout(()=>cur.classList.remove('is-leaving'), TRANSITION_MS);} index=(n+slides.length)%slides.length; nxt.classList.add('is-active');}
+              function next(){show(index+1);} function prev(){show(index-1);} function start(){stop(); if(!prefersReduced) timer=setInterval(next, DISPLAY_MS);} function stop(){if(timer){clearInterval(timer); timer=null;}}
+              section.addEventListener('mouseenter', stop); section.addEventListener('mouseleave', start); section.addEventListener('focusin', stop); section.addEventListener('focusout', ()=>{ if(!section.contains(document.activeElement)) start(); });
+              section.addEventListener('keydown', (e)=>{const k=e.key; if(k==='ArrowLeft'||k==='q'||k==='Q'){e.preventDefault(); prev();} else if(k==='ArrowRight'||k==='a'||k==='A'){e.preventDefault(); next();}});
+              if(!prefersReduced) start(); container.innerHTML=''; container.appendChild(section);
+            };
+          })();
+        }
+      });
   }
 
   function findHeroContainer() {
