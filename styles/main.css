@@ -1124,17 +1124,23 @@ ul {
 
  
 /* === Hero Quotes (overlay sur image, sans bande) === */
-:root{ --hq-top: calc(var(--hq-reserve) / 2); --hq-maxw:820px; --hq-fade:.5s; --hq-reserve:22vh; }
+:root{ --hq-top:12vh; --hq-maxw:820px; --hq-fade:.5s; --hq-reserve:20vh; }
 .hero{ position:relative; }
 .page-hero, .masthead, .banner { position: relative; }
 .page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { margin-top: var(--hq-reserve); }
 .hero-quotes{
   position:absolute; top:var(--hq-top); left:50%; transform:translateX(-50%);
   width:min(100%,var(--hq-maxw)); padding:0 1rem; text-align:center;
-  color:inherit; background:transparent; z-index:5; pointer-events:auto;
+  color:inherit; background:transparent; z-index:50; pointer-events:auto;
 }
 .hq-slide{ position:absolute; left:0; right:0; top:0; margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease; }
 .hq-slide.is-active{ opacity:1; visibility:visible; }
- param($m) $block=$m.Groups[1].Value; if($block -notmatch "white-space") { return ".hero-quotes blockquote{`n  margin:0 0 .35rem; font-style:italic; font-weight:600;`n  font-size:clamp(1rem,1.8vw,1.3rem); line-height:1.3; text-wrap:balance;`n  text-shadow:0 2px 8px rgba(0,0,0,.35);`n  padding:0; border:0; background:transparent; border-radius:0;`n  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;`n}" } else { return $m.Value } 
- param($m) ".hero-quotes figcaption{ font-size:clamp(.85rem,1.4vw,.95rem); opacity:.95; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }" 
+.hero-quotes blockquote{
+  margin:0; font-style:italic; font-weight:600; display:inline;
+  font-size:clamp(1rem,1.6vw,1.2rem); line-height:1.2; text-wrap:balance;
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
+  padding:0; border:0; background:transparent; border-radius:0;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.hero-quotes figcaption{ display:inline; margin-left:.5rem; font-size:clamp(.85rem,1.2vw,.95rem); opacity:.95; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 @media (prefers-reduced-motion:reduce){ .hq-slide{ transition:none } }
