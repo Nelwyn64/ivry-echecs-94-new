@@ -1124,13 +1124,13 @@ ul {
 
  
 /* === Hero Quotes (overlay sur image, sans bande) === */
-:root{ --hq-top:5.5rem; --hq-maxw:900px; --hq-fade:.5s; --hq-reserve:20vh; }
+:root{ --hq-top:1rem; --hq-maxw:900px; --hq-fade:.5s; --hq-reserve:20vh; }
 .hero{ position:relative; }
 .page-hero, .masthead, .banner { position: relative; }
 .page-hero > .hero-content, .masthead > .hero-content, .banner > .hero-content { margin-top: var(--hq-reserve); }
 .hero-quotes{
-  position:absolute; top:var(--hq-top); left:2rem; right:auto; transform:none;
-  width:min(100%,var(--hq-maxw)); padding:0 1rem 0 2rem; text-align:left;
+  position:absolute; top:var(--hq-top); left:0.75rem; right:auto; transform:none;
+  width:min(100%,var(--hq-maxw)); padding:0 .5rem; text-align:left;
   color:inherit; background:transparent; z-index:50; pointer-events:auto;
 }
 .hq-slide{ position:absolute; left:0; right:0; top:0; margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease; }
