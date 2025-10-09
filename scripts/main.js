@@ -121,3 +121,92 @@
     element.classList.toggle("form-status--success", !isError);
   }
 })();
+
+// ------------------------------------------------------------
+// Hero Quotes — injection automatique après le header
+// - Détecte le conteneur du hero, lui ajoute .hero si besoin
+// - Insère un slot <div id="hero-quotes-slot"> entouré de commentaires
+// - Charge scripts (quotes-data, hero-quotes) et monte le carrousel
+// - Ne touche pas aux formulaires (Netlify compris)
+// ------------------------------------------------------------
+(function () {
+  if (window.__ivryHeroQuotesInjected) return;
+  window.__ivryHeroQuotesInjected = true;
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      // évite double-chargement
+      if ([...document.scripts].some(s => s.src.endsWith(src))) return resolve();
+      const s = document.createElement('script'); s.src = src; s.defer = true;
+      s.onload = () => resolve(); s.onerror = () => reject(new Error('load fail '+src));
+      document.head.appendChild(s);
+    });
+  }
+
+  function ensureDeps() {
+    if (window.QUOTES && window.mountHeroQuotes) return Promise.resolve();
+    return loadScript('/scripts/quotes-data.js').then(() => loadScript('/scripts/hero-quotes.js'));
+  }
+
+  function findHeroContainer() {
+    // 1) Priorité à .hero si présent
+    let el = document.querySelector('.hero');
+    if (el) return el;
+    // 2) Sinon heuristique: .masthead | .page-hero | .banner
+    el = document.querySelector('.masthead, .page-hero, .banner');
+    if (el) return el;
+    // 3) Fallback: premier <section> après header
+    const header = document.querySelector('header[role="banner"], .site-header');
+    if (header) {
+      let n = header.nextElementSibling;
+      while (n) { if (n.tagName === 'SECTION') return n; n = n.nextElementSibling; }
+    }
+    // 4) Dernier recours: <main>
+    return document.querySelector('main') || document.body;
+  }
+
+  function insertSlot(anchorHero) {
+    if (!anchorHero) return null;
+    anchorHero.classList.add('hero'); // garantit position:relative via CSS
+
+    // Remplacer existant si déjà présent
+    let slot = document.getElementById('hero-quotes-slot');
+    if (slot && slot.parentNode === anchorHero) return slot;
+    if (slot && slot.parentNode) slot.parentNode.removeChild(slot);
+
+    const startC = document.createComment(' HERO-QUOTES-START ');
+    slot = document.createElement('div'); slot.id = 'hero-quotes-slot';
+    const endC = document.createComment(' HERO-QUOTES-END ');
+
+    // Insertion en premier enfant du hero pour surimpression cohérente
+    anchorHero.insertBefore(endC, anchorHero.firstChild);
+    anchorHero.insertBefore(slot, endC);
+    anchorHero.insertBefore(startC, slot);
+    return slot;
+  }
+
+  function mount() {
+    const hero = findHeroContainer();
+    const slot = insertSlot(hero);
+    if (!slot) return;
+    if (window.mountHeroQuotes) {
+      window.mountHeroQuotes(slot);
+    }
+  }
+
+  function init() {
+    ensureDeps().then(mount).catch((e) => console.warn('[HeroQuotes] non chargé', e));
+  }
+
+  // Lance après DOMContentLoaded (et après include header)
+  document.addEventListener('DOMContentLoaded', () => {
+    // Si header est inclus dynamiquement, surveille le DOM brièvement
+    const observer = new MutationObserver((list, obs) => {
+      const hasHeader = document.querySelector('header[role="banner"], .site-header');
+      if (hasHeader) { obs.disconnect(); init(); }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    // Et essaye immédiatement si tout est déjà là
+    init();
+  });
+})();
