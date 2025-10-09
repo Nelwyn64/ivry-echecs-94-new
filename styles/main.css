@@ -1123,20 +1123,4 @@ ul {
 
 
  
-/* === Hero Quotes (overlay sur image, sans bande) === */
-:root{ --hq-top:18vh; --hq-maxw:1100px; --hq-fade:.5s; }
-.hero{ position:relative; }
-.hero-quotes{
-  position:absolute; top:var(--hq-top); left:50%; transform:translateX(-50%);
-  width:min(100%,var(--hq-maxw)); padding:0 1rem; text-align:center;
-  color:inherit; background:transparent; z-index:2; pointer-events:auto;
-}
-.hq-slide{ margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease, visibility var(--hq-fade) ease; }
-.hq-slide.is-active{ opacity:1; visibility:visible; }
-.hero-quotes blockquote{
-  margin:0 0 .35rem; font-style:italic; font-weight:600;
-  font-size:clamp(1.25rem,3.2vw,2rem); line-height:1.35; text-wrap:balance;
-  text-shadow:0 2px 8px rgba(0,0,0,.35);
-}
-.hero-quotes figcaption{ font-size:clamp(.95rem,1.8vw,1.1rem); opacity:.95; }
-@media (prefers-reduced-motion:reduce){ .hq-slide{ transition:none } }
+
