@@ -1131,7 +1131,7 @@ ul {
 .hero-quotes{
   position:absolute; top:var(--hq-top); left:50%; transform:translateX(-50%);
   width:min(100%,var(--hq-maxw)); padding:0 1rem; text-align:center;
-  color:inherit; background:transparent; z-index:2; pointer-events:auto;
+  color:inherit; background:transparent; z-index:5; pointer-events:auto;
 }
 .hq-slide{ margin:0; opacity:0; visibility:hidden; transition:opacity var(--hq-fade) ease, visibility var(--hq-fade) ease; }
 .hq-slide.is-active{ opacity:1; visibility:visible; }
