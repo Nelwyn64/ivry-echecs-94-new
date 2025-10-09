@@ -1139,6 +1139,7 @@ ul {
   margin:0 0 .35rem; font-style:italic; font-weight:600;
   font-size:clamp(1.25rem,3.2vw,2rem); line-height:1.35; text-wrap:balance;
   text-shadow:0 2px 8px rgba(0,0,0,.35);
+  padding:0; border:0; background:transparent; border-radius:0;
 }
 .hero-quotes figcaption{ font-size:clamp(.95rem,1.8vw,1.1rem); opacity:.95; }
 @media (prefers-reduced-motion:reduce){ .hq-slide{ transition:none } }
