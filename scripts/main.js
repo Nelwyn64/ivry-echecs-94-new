@@ -121,3 +121,84 @@
     element.classList.toggle("form-status--success", !isError);
   }
 })();
+
+// ------------------------------------------------------------
+// Injection automatique du carrousel APRÈS le header (toutes pages)
+// - Ne touche pas aux formulaires (Netlify compris)
+// - Charge quotes-data.js puis quotes-carousel.js et monte dans #insertion-citations
+// ------------------------------------------------------------
+(function () {
+  if (window.__ivryQuotesInjected) return; // éviter double-injection
+  window.__ivryQuotesInjected = true;
+
+  function ensureScriptsLoaded() {
+    return new Promise((resolve, reject) => {
+      if (window.mountQuotesCarousel && window.QUOTES) return resolve();
+      function load(src) {
+        return new Promise((res, rej) => {
+          const s = document.createElement('script');
+          s.src = src; s.defer = true;
+          s.onload = () => res(); s.onerror = () => rej(new Error('load fail '+src));
+          document.head.appendChild(s);
+        });
+      }
+      load('/scripts/quotes-data.js')
+        .then(() => load('/scripts/quotes-carousel.js'))
+        .then(resolve)
+        .catch(reject);
+    });
+  }
+
+  function insertAfter(ref, node) {
+    if (ref && ref.parentNode) {
+      if (ref.nextSibling) ref.parentNode.insertBefore(node, ref.nextSibling);
+      else ref.parentNode.appendChild(node);
+    }
+  }
+
+  function placeSlotAfterHeader() {
+    const header = document.querySelector('header[role="banner"], .site-header');
+    const include = document.querySelector('[data-include="/header.html"], [data-include]');
+    const anchorRef = header || include;
+    if (!anchorRef) return null;
+
+    let slot = document.getElementById('insertion-citations');
+    if (slot && slot.parentNode) return slot;
+
+    const startC = document.createComment(' CITATIONS-START ');
+    slot = document.createElement('div');
+    slot.id = 'insertion-citations';
+    const endC = document.createComment(' CITATIONS-END ');
+
+    insertAfter(anchorRef, startC);
+    insertAfter(startC, slot);
+    insertAfter(slot, endC);
+    return slot;
+  }
+
+  function mountIfReady() {
+    const slot = placeSlotAfterHeader();
+    if (!slot) return false;
+    if (window.mountQuotesCarousel) {
+      window.mountQuotesCarousel(slot);
+      return true;
+    }
+    return false;
+  }
+
+  function waitForHeaderAndMount() {
+    if (mountIfReady()) return;
+    const obs = new MutationObserver(() => {
+      if (mountIfReady()) {
+        obs.disconnect();
+      }
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ensureScriptsLoaded()
+      .then(waitForHeaderAndMount)
+      .catch((e) => console.warn('[Citations] non chargé', e));
+  });
+})();

@@ -1123,3 +1123,10 @@ ul {
 
 
  
+/* Quotes carousel (fond transparent, sur l'image de fond) */
+.quotes-carousel{margin:2.5rem auto 1rem;max-width:960px;text-align:center;color:inherit;background:transparent}
+.quotes-carousel .quote{opacity:0;visibility:hidden;transition:opacity 0.5s ease, visibility 0.5s ease;margin:0}
+.quotes-carousel .quote.is-active{opacity:1;visibility:visible}
+.quotes-carousel blockquote{margin:0 0 .5rem;font-style:italic;font-size:clamp(1.2rem,2.6vw,1.8rem);line-height:1.4;text-wrap:balance;text-shadow:0 2px 6px rgba(0,0,0,.35)}
+.quotes-carousel figcaption{font-size:.95rem;opacity:.9}
+@media (prefers-reduced-motion:reduce){.quotes-carousel .quote{transition:none}}
