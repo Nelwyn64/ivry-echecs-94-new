@@ -159,7 +159,7 @@
         }
         if (!window.mountHeroQuotes) {
           (function(){
-            const DISPLAY_MS = 10000, TRANSITION_MS = 500;
+            const DISPLAY_MS = 20000, TRANSITION_MS = 500;
             function authorLabel(q){const b=typeof q.born==='number'?q.born:'';const d=typeof q.died==='number'?q.died:'';return b&&d?`${q.author} (${b}–${d})`:(q.author||'');}
             window.mountHeroQuotes = function(container){
               if(!container) return; const quotes=(window.QUOTES||[]).slice(0); if(!quotes.length) return;
@@ -168,10 +168,10 @@
               slides.forEach(s=>section.appendChild(s));
               let index=0, timer=null; const prefersReduced=(()=>{try{const m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)');return !!(m&&m.matches);}catch(_){return false;}})();
               function show(n){if(n===index) return; const cur=slides[index]; const nxt=slides[(n+slides.length)%slides.length]; cur.classList.remove('is-active'); if(!prefersReduced){cur.classList.add('is-leaving'); setTimeout(()=>cur.classList.remove('is-leaving'), TRANSITION_MS);} index=(n+slides.length)%slides.length; nxt.classList.add('is-active');}
-              function next(){show(index+1);} function prev(){show(index-1);} function start(){stop(); if(!prefersReduced) timer=setInterval(next, DISPLAY_MS);} function stop(){if(timer){clearInterval(timer); timer=null;}}
+              function next(){show(index+1);} function prev(){show(index-1);} function start(){stop(); if(slides.length>1) timer=setInterval(next, DISPLAY_MS);} function stop(){if(timer){clearInterval(timer); timer=null;}}
               section.addEventListener('mouseenter', stop); section.addEventListener('mouseleave', start); section.addEventListener('focusin', stop); section.addEventListener('focusout', ()=>{ if(!section.contains(document.activeElement)) start(); });
               section.addEventListener('keydown', (e)=>{const k=e.key; if(k==='ArrowLeft'||k==='q'||k==='Q'){e.preventDefault(); prev();} else if(k==='ArrowRight'||k==='a'||k==='A'){e.preventDefault(); next();}});
-              if(!prefersReduced) start(); container.innerHTML=''; container.appendChild(section);
+              if(slides.length>1) start(); container.innerHTML=''; container.appendChild(section);
             };
           })();
         }

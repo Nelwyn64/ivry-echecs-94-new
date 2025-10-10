@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hero Quotes (overlay sans fond) — Ivry Échecs 94
  * Timings: DISPLAY_MS = 10000, TRANSITION_MS = 500
  * A11y: section focusable (tabindex=0), ←/→ (ou A/Q FR), aria-live="polite" sur la citation active
@@ -58,7 +58,7 @@
     function next() { show(index + 1); }
     function prev() { show(index - 1); }
 
-    function start() { stop(); if (!prefersReduced) timer = window.setInterval(next, DISPLAY_MS); }
+    function start() { stop(); if (slides.length > 1) { timer = window.setInterval(next, DISPLAY_MS); } }
     function stop() { if (timer) { window.clearInterval(timer); timer = null; } }
 
     section.addEventListener('mouseenter', stop);
@@ -71,7 +71,7 @@
       else if (k === 'ArrowRight' || k === 'a' || k === 'A') { e.preventDefault(); next(); }
     });
 
-    if (!prefersReduced) start();
+    if (slides.length > 1) start();
     return section;
   }
 
