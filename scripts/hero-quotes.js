@@ -4,7 +4,7 @@
  * A11y: section focusable (tabindex=0), ←/→ (ou A/Q FR), aria-live="polite" sur la citation active
  */
 (function () {
-  const DISPLAY_MS = 10000;
+  const DISPLAY_MS = 20000;
   const TRANSITION_MS = 500;
 
   function authorLabel(q) {
