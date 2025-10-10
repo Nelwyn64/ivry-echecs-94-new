@@ -442,7 +442,7 @@ img {
   margin: 0.5rem 0 0;
 }
 
-/* Increase contrast for section titles on Club and AdhÃ©sion pages */
+/* Increase contrast for section titles on Club and Adhésion pages */
 .body-club .section-header .section-title,
 .body-adhesion .section-header .section-title {
   color: var(--color-secondary);
@@ -712,7 +712,7 @@ img {
 }
 
 .download-list span::before {
-  content: "Ã°Å¸â€œâ€ž";
+  content: "ðŸ“„";
   font-size: 1.1rem;
 }
 
@@ -742,7 +742,7 @@ img {
 }
 
 .links-group a::before {
-  content: "Ã¢â€ â€™";
+  content: "â†’";
   font-size: 0.9rem;
   color: var(--color-primary);
 }
@@ -786,8 +786,8 @@ img {
   }
 }
 
-/* Fixe lâ€™affichage des puces dans lâ€™encadrÃ© "MatÃ©riels pÃ©dagogique/enseignement"
-   de la page AdhÃ©sion: utilise des points classiques comme lâ€™encadrÃ© voisin. */
+/* Fixe l’affichage des puces dans l’encadré "Matériels pédagogique/enseignement"
+   de la page Adhésion: utilise des points classiques comme l’encadré voisin. */
 .body-adhesion .download-list {
   list-style: disc;
   padding-left: 1.25rem;
@@ -1035,8 +1035,8 @@ body.body-liens .page-hero {
   background-image: url("/assets/photos/ai-generated-9789195_1920.jpg");
 }
 
-/* Liens utiles: supprimer l'icÃ´ne prÃ©cÃ©dant chaque lien
-   tout en conservant la validitÃ© des liens */
+/* Liens utiles: supprimer l'icône précédant chaque lien
+   tout en conservant la validité des liens */
 .body-liens .links-group a::before {
   content: none;
 }
